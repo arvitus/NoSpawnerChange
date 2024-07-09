@@ -3,7 +3,7 @@
   "id": "nospawnerchange",
   "version": "${version}",
   "name": "No Spawner Change",
-  "description": "Prohibits the use of spawn eggs on spawners in survival mode.",
+  "description": "Disables the ability to change the spawner type in survival mode",
   "authors": [
     "arvitus"
   ],
