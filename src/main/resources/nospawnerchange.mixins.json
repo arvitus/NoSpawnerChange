@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "de.arvitus.nospawnerchange.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "SpawnEggItemMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "nospawnerchange",
+  "version": "${version}",
+  "name": "No Spawner Change",
+  "description": "Prohibits the use of spawn eggs on spawners in survival mode.",
+  "authors": [
+    "arvitus"
+  ],
+  "contact": {
+    "homepage": "https://github.com/arvitus/NoSpawnerChange",
+    "sources": "https://github.com/arvitus/NoSpawnerChange"
+  },
+  "license": "GPL-3.0",
+  "icon": "assets/nospawnerchange/icon.png",
+  "environment": "server",
+  "entrypoints": {},
+  "mixins": [
+    "nospawnerchange.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.15.11",
+    "minecraft": "~1.21",
+    "java": ">=21"
+  }
+}
