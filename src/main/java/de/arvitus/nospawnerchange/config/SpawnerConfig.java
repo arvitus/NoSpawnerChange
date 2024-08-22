@@ -17,13 +17,4 @@ public class SpawnerConfig {
         "This will do nothing if `change` and `change-empty` are false."
     )
     public boolean onlyWithCanPlaceOn = true;
-
-    @Override
-    public String toString() {
-        return "SpawnerConfig{" +
-               "change=" + change +
-               ", changeEmpty=" + changeEmpty +
-               ", canPlaceOn=" + onlyWithCanPlaceOn +
-               '}';
-    }
 }
