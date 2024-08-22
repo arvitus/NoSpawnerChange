@@ -34,3 +34,4 @@ trial-spawner {
   only-with-can-place-on = true
 }
 ```
+You can reload the config by using `/reload`.
