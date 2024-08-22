@@ -14,13 +14,18 @@
   "license": "GPL-3.0",
   "icon": "assets/nospawnerchange/icon.png",
   "environment": "*",
-  "entrypoints": {},
+  "entrypoints": {
+    "main": [
+      "de.arvitus.nospawnerchange.NoSpawnerChange"
+    ]
+  },
   "mixins": [
     "nospawnerchange.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.15.11",
     "minecraft": "~1.21",
-    "java": ">=21"
+    "java": ">=21",
+    "fabric": "*"
   }
 }

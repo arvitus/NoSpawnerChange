@@ -1,25 +1,75 @@
 package de.arvitus.nospawnerchange.mixin;
 
+import com.llamalad7.mixinextras.sugar.Local;
+import de.arvitus.nospawnerchange.config.SpawnerConfig;
+import net.minecraft.block.entity.MobSpawnerBlockEntity;
+import net.minecraft.block.entity.Spawner;
+import net.minecraft.block.entity.TrialSpawnerBlockEntity;
 import net.minecraft.block.pattern.CachedBlockPosition;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
-import net.minecraft.item.SpawnEggItem;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
+
+import static de.arvitus.nospawnerchange.NoSpawnerChange.CONFIG;
 
 @Mixin(SpawnEggItem.class)
 public class SpawnEggItemMixin {
-    @Inject(method = "useOnBlock", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/SpawnEggItem;getEntityType(Lnet/minecraft/item/ItemStack;)Lnet/minecraft/entity/EntityType;", shift = At.Shift.BEFORE, ordinal = 0), cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
-    private void disableInSurvival(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir, World world, ItemStack itemStack, BlockPos blockPos) {
+    @Inject(
+        method = "useOnBlock",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/item/SpawnEggItem;getEntityType(Lnet/minecraft/item/ItemStack;)" +
+                     "Lnet/minecraft/entity/EntityType;",
+            ordinal = 0
+        ),
+        cancellable = true
+    )
+    private void disableInSurvival(
+        ItemUsageContext context,
+        CallbackInfoReturnable<ActionResult> cir,
+        @Local World world,
+        @Local ItemStack itemStack,
+        @Local BlockPos blockPos,
+        @Local Spawner spawner
+    ) {
         PlayerEntity player = context.getPlayer();
-        if (player == null || player.isCreative() || itemStack.canPlaceOn(new CachedBlockPosition(world, blockPos, false))) {
+        if (player == null || player.isCreative()) return;
+
+        SpawnerConfig spawnerConfig = null;
+        Boolean isEmpty = null;
+
+        boolean canPlaceOn = itemStack.canPlaceOn(new CachedBlockPosition(world, blockPos, false));
+        if (spawner instanceof MobSpawnerBlockEntity mobSpawner) {
+            spawnerConfig = CONFIG.monsterSpawner;
+            isEmpty = mobSpawner.getLogic().getRenderedEntity(world, blockPos) == null;
+        }
+        else if (spawner instanceof TrialSpawnerBlockEntity trialSpawner) {
+            spawnerConfig = CONFIG.trialSpawner;
+            isEmpty = !trialSpawner
+                .getSpawner()
+                .getData()
+                .getSpawnDataNbt(trialSpawner.getSpawnerState())
+                .getCompound("spawn_data")
+                .getCompound("entity")
+                .contains("id");
+        }
+
+        if (
+            (isEmpty != null && spawnerConfig != null) &&
+            (!spawnerConfig.onlyWithCanPlaceOn || canPlaceOn) &&
+            (
+                (isEmpty && spawnerConfig.changeEmpty) ||
+                (!isEmpty && spawnerConfig.change)
+            )
+        ) {
             return;
         }
 
