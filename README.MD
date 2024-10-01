@@ -6,7 +6,7 @@
 [![Static Badge](https://img.shields.io/badge/GitHub-010409?style=flat&logo=github)](https://github.com/arvitus/NoSpawnerChange)
 [![Static Badge](https://img.shields.io/badge/Discord-5662f6?style=flat&logo=discord&logoColor=white)](https://discord.gg/xzdbetZVrn)
 
-A Minecraft mod that disables the ability to change the spawner type in survival mode.
+A Minecraft mod that prevents changing the spawner type in survival mode.
 
 </div>
 
