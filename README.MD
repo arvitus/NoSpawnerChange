@@ -1,15 +1,25 @@
+<div align="center">
+
 # No Spawner Change
 
-*A Minecraft mod that disables the ability to change the spawner type in survival mode.*
+[![Static Badge](https://img.shields.io/badge/modrinth-16181c?style=flat&logo=modrinth)](https://modrinth.com/mod/nospawnerchange)
+[![Static Badge](https://img.shields.io/badge/GitHub-010409?style=flat&logo=github)](https://github.com/arvitus/NoSpawnerChange)
+[![Static Badge](https://img.shields.io/badge/Discord-5662f6?style=flat&logo=discord&logoColor=white)](https://discord.gg/xzdbetZVrn)
 
-## What it does
+A Minecraft mod that disables the ability to change the spawner type in survival mode.
 
-With this mod installed, by default, changing a spawner in survival mode will behave exactly like it does in adventure mode.
+</div>
+
+## What does it do?
+
+With this mod installed, by default, changing a spawner in survival mode will behave exactly like it does in adventure
+mode.
 So you won't be able to change the spawner type, unless the `can_place_on` component of the Spawn Egg allows it.
 
 You can further customize this behavior using the config.
 
 ## Config (default)
+
 ```hocon
 # Configuration for normal monster spawners
 monster-spawner {
@@ -34,4 +44,5 @@ trial-spawner {
   only-with-can-place-on = true
 }
 ```
+
 You can reload the config by using `/reload`.
