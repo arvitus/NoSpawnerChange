@@ -2,7 +2,7 @@
 
 # No Spawner Change
 
-[![Static Badge](https://img.shields.io/badge/modrinth-16181c?style=flat&logo=modrinth)](https://modrinth.com/mod/nospawnerchange)
+[![Static Badge](https://img.shields.io/badge/modrinth-00AF5C?logo=modrinth&logoColor=white)](https://modrinth.com/mod/nospawnerchange)
 [![Static Badge](https://img.shields.io/badge/GitHub-010409?style=flat&logo=github)](https://github.com/arvitus/NoSpawnerChange)
 [![Static Badge](https://img.shields.io/badge/Discord-5662f6?style=flat&logo=discord&logoColor=white)](https://discord.gg/xzdbetZVrn)
 
