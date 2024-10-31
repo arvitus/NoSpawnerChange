@@ -1,4 +1,5 @@
 plugins {
+    id 'io.github.goooler.shadow' version '8.1.8'
     id 'fabric-loom' version "${loom_version}"
 }
 
@@ -37,7 +38,18 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    implementation "org.spongepowered:configurate-hocon:${project.configurate_version}"
+    implementation shadow("org.spongepowered:configurate-hocon:${project.configurate_version}")
+}
+
+shadowJar {
+    minimize()
+    archiveClassifier.set("shadow")
+    configurations = [project.configurations.shadow]
+    from sourceSets.main.output
+}
+
+remapJar {
+    from zipTree(shadowJar.archiveFile) dependsOn shadowJar
 }
 
 processResources {
