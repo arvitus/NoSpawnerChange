@@ -5,16 +5,10 @@ import org.spongepowered.configurate.objectmapping.meta.Comment;
 
 @ConfigSerializable
 public class SpawnerConfig {
-    @Comment("Whether to allow changing mob type.")
-    public boolean change = true;
-    @Comment(
-        "Whether to allow setting the mob type, if the spawner is empty.\n" +
-        "This overrides `change`."
-    )
-    public boolean changeEmpty = true;
-    @Comment(
-        "Whether to allow changing the mob type ONLY if the `can_place_on` component of the spawn egg is set.\n" +
-        "This will do nothing if `change` and `change-empty` are false."
-    )
+    @Comment("Whether to allow changing the mob type.")
+    public boolean allowChange = true;
+    @Comment("Whether to allow changing the mob type ONLY if the spawner is empty.")
+    public boolean onlyIfEmpty = true;
+    @Comment("Whether to allow changing the mob type ONLY if the `can_place_on` component of the spawn egg is set.")
     public boolean onlyWithCanPlaceOn = true;
 }

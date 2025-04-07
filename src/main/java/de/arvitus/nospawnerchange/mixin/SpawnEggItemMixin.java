@@ -47,12 +47,11 @@ public class SpawnEggItemMixin {
         SpawnerConfig spawnerConfig = null;
         Boolean isEmpty = null;
 
-        boolean canPlaceOn = itemStack.canPlaceOn(new CachedBlockPosition(world, blockPos, false));
+        boolean canPlace = itemStack.canPlaceOn(new CachedBlockPosition(world, blockPos, false));
         if (spawner instanceof MobSpawnerBlockEntity mobSpawner) {
             spawnerConfig = CONFIG.monsterSpawner;
             isEmpty = mobSpawner.getLogic().getRenderedEntity(world, blockPos) == null;
-        }
-        else if (spawner instanceof TrialSpawnerBlockEntity trialSpawner) {
+        } else if (spawner instanceof TrialSpawnerBlockEntity trialSpawner) {
             spawnerConfig = CONFIG.trialSpawner;
             isEmpty = !trialSpawner
                 .getSpawner()
@@ -65,11 +64,9 @@ public class SpawnEggItemMixin {
 
         if (
             (isEmpty != null && spawnerConfig != null) &&
-            (!spawnerConfig.onlyWithCanPlaceOn || canPlaceOn) &&
-            (
-                (isEmpty && spawnerConfig.changeEmpty) ||
-                (!isEmpty && spawnerConfig.change)
-            )
+            spawnerConfig.allowChange &&
+            (!spawnerConfig.onlyWithCanPlaceOn || canPlace) &&
+            (isEmpty && spawnerConfig.onlyIfEmpty)
         ) {
             return;
         }
