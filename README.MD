@@ -12,9 +12,9 @@ A Minecraft mod that prevents changing the spawner type in survival mode.
 
 ## What does it do?
 
-With this mod installed, by default, changing a spawner in survival mode will behave exactly like it does in adventure
-mode.
-So you won't be able to change the spawner type, unless the `can_place_on` component of the Spawn Egg allows it.
+With this mod installed, by default, changing a spawner in survival mode will behave exactly like it usually does in
+adventure mode.
+So you won't be able to change the spawner type, unless the `can_place_on` component of the spawn egg allows it.
 
 You can further customize this behavior using the config.
 
