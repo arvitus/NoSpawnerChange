@@ -66,7 +66,7 @@ public class SpawnEggItemMixin {
             (isEmpty != null && spawnerConfig != null) &&
             spawnerConfig.allowChange &&
             (!spawnerConfig.onlyWithCanPlaceOn || canPlace) &&
-            (isEmpty && spawnerConfig.onlyIfEmpty)
+            (!spawnerConfig.onlyIfEmpty || isEmpty)
         ) {
             return;
         }
