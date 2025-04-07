@@ -8,7 +8,7 @@ public class SpawnerConfig {
     @Comment("Whether to allow changing the mob type.")
     public boolean allowChange = true;
     @Comment("Whether to allow changing the mob type ONLY if the spawner is empty.")
-    public boolean onlyIfEmpty = true;
+    public boolean onlyIfEmpty = false;
     @Comment("Whether to allow changing the mob type ONLY if the `can_place_on` component of the spawn egg is set.")
     public boolean onlyWithCanPlaceOn = true;
 }
