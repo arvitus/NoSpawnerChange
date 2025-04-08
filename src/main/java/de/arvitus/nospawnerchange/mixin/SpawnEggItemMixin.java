@@ -12,6 +12,7 @@ import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -56,10 +57,7 @@ public class SpawnEggItemMixin {
             isEmpty = !trialSpawner
                 .getSpawner()
                 .getData()
-                .getSpawnDataNbt(trialSpawner.getSpawnerState())
-                .getCompound("spawn_data")
-                .getCompound("entity")
-                .contains("id");
+                .hasSpawnData(trialSpawner.getSpawner(), Random.create());
         }
 
         if (
