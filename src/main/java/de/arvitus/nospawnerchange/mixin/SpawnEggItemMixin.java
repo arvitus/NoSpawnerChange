@@ -27,10 +27,8 @@ public class SpawnEggItemMixin {
         method = "useOnBlock",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/item/SpawnEggItem;getEntityType" +
-                     "(Lnet/minecraft/registry/RegistryWrapper$WrapperLookup;Lnet/minecraft/item/ItemStack;)" +
-                     "Lnet/minecraft/entity/EntityType;",
-            ordinal = 0
+            target = "Lnet/minecraft/item/SpawnEggItem;getEntityType(Lnet/minecraft/item/ItemStack;)" +
+                     "Lnet/minecraft/entity/EntityType;"
         ),
         cancellable = true
     )
