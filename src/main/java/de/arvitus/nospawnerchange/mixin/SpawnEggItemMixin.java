@@ -27,18 +27,18 @@ public class SpawnEggItemMixin {
         method = "useOn",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/item/SpawnEggItem;getType(Lnet/minecraft/world/item/ItemStack;)" +
-                     "Lnet/minecraft/world/entity/EntityType;"
+            target = "Lnet/minecraft/world/level/Spawner;setEntityId(Lnet/minecraft/world/entity/EntityType;" +
+                     "Lnet/minecraft/util/RandomSource;)V"
         ),
         cancellable = true
     )
     private void disableInSurvival(
         UseOnContext context,
         CallbackInfoReturnable<InteractionResult> cir,
-        @Local Level world,
+        @Local Level level,
         @Local ItemStack itemStack,
-        @Local BlockPos blockPos,
-        @Local Spawner spawner
+        @Local BlockPos pos,
+        @Local Spawner spawnerHolder
     ) {
         Player player = context.getPlayer();
         if (player == null || player.isCreative()) return;
@@ -46,11 +46,11 @@ public class SpawnEggItemMixin {
         SpawnerConfig spawnerConfig = null;
         Boolean isEmpty = null;
 
-        boolean canPlace = itemStack.canPlaceOnBlockInAdventureMode(new BlockInWorld(world, blockPos, false));
-        if (spawner instanceof SpawnerBlockEntity mobSpawner) {
+        boolean canPlace = itemStack.canPlaceOnBlockInAdventureMode(new BlockInWorld(level, pos, false));
+        if (spawnerHolder instanceof SpawnerBlockEntity mobSpawner) {
             spawnerConfig = CONFIG.monsterSpawner;
-            isEmpty = mobSpawner.getSpawner().getOrCreateDisplayEntity(world, blockPos) == null;
-        } else if (spawner instanceof TrialSpawnerBlockEntity trialSpawner) {
+            isEmpty = mobSpawner.getSpawner().getOrCreateDisplayEntity(level, pos) == null;
+        } else if (spawnerHolder instanceof TrialSpawnerBlockEntity trialSpawner) {
             spawnerConfig = CONFIG.trialSpawner;
             isEmpty = !trialSpawner
                 .getTrialSpawner()
