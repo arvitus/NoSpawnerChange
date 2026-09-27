@@ -27,20 +27,20 @@ public class SpawnEggItemMixin {
         method = "useOn",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/level/Spawner;setEntityId(Lnet/minecraft/world/entity/EntityType;" +
-                     "Lnet/minecraft/util/RandomSource;)V"
+            target = "Lnet/minecraft/world/item/ItemStack;get(Lnet/minecraft/core/component/DataComponentType;)" +
+                     "Ljava/lang/Object;"
         ),
         cancellable = true
     )
     private void disableInSurvival(
         UseOnContext context,
         CallbackInfoReturnable<InteractionResult> cir,
+        @Local Player player,
         @Local Level level,
         @Local ItemStack itemStack,
         @Local BlockPos pos,
         @Local Spawner spawnerHolder
     ) {
-        Player player = context.getPlayer();
         if (player == null || player.isCreative()) return;
 
         SpawnerConfig spawnerConfig = null;
